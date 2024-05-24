@@ -21,10 +21,10 @@ export class Database {
 
     select(table, search) {
         const data = this.#database[table] ?? [];
-    
-        if (Object.keys(search).length !== 0) {
+
+        if (search) {
             const filteredData = data.filter(row => {
-                return Object.entries(search).some(([key, value]) => {
+                return Object.entries(search).every(([key, value]) => {
                     return row[key] && row[key].includes(value);
                 });
             });

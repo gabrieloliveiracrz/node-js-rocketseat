@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { Database } from "./database.js"
 import { buildRoutePath } from "./utils/build-route-path.js";
+import { title } from "node:process";
 
 const database = new Database()
 
@@ -11,10 +12,9 @@ export const routes = [
         handler: (req, res) => {
             const search = req.query
 
-            const tasks = database.select('tasks', Object.keys(search).length !== 0 ? search : null)
+            const tasks = database.select('tasks', search)
 
-            return res
-                .end(JSON.stringify(tasks))
+            return res.end(JSON.stringify(tasks))
         }
     },
     {
@@ -22,8 +22,16 @@ export const routes = [
         path: buildRoutePath('/tasks'),
         handler: (req, res) => {
             const { title, description } = req.body
-            const date = new Date()
 
+            if (!title) {
+                return res.writeHead(404).end(JSON.stringify({ message: 'Title not found' }))
+            }
+
+            if (!description) {
+                return res.writeHead(404).end(JSON.stringify({ message: 'Description not found' }))
+            }
+
+            const date = new Date()
             const task = {
                 id: randomUUID(),
                 title,
@@ -44,6 +52,20 @@ export const routes = [
         handler: (req, res) => {
             const { id } = req.params
             const { title, description } = req.body
+
+
+            if (database.select('tasks', id).length === 0) {
+                return res.writeHead(404).end(JSON.stringify({ message: 'Task not found' }))
+            }
+
+            if (!title) {
+                return res.writeHead(404).end(JSON.stringify({ message: 'Title not found' }))
+            }
+
+            if (!description) {
+                return res.writeHead(404).end(JSON.stringify({ message: 'Description not found' }))
+            }
+
             const date = new Date()
 
             database.update('tasks', id, {
@@ -62,6 +84,10 @@ export const routes = [
             const { id, status } = req.params
             const date = new Date()
 
+            if (database.select('tasks', id).length === 0) {
+                return res.writeHead(404).end(JSON.stringify({ message: 'Task not found' }))
+            }
+
             database.update('tasks', id, {
                 status,
                 updated_at: date.toLocaleString(),
@@ -76,6 +102,10 @@ export const routes = [
         path: buildRoutePath('/tasks/:id'),
         handler: (req, res) => {
             const { id } = req.params
+
+            if (database.select('tasks', id).length === 0) {
+                return res.writeHead(404).end(JSON.stringify({ message: 'Task not found' }))
+            }
 
             database.delete('tasks', id)
 
