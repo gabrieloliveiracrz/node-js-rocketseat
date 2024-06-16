@@ -1,0 +1,21 @@
+Desafio 02 NodeJS 
+Todo:
+  ✔ Deve ser possível criar um usuário @done(24-06-16 11:40)
+  ✔ Deve ser possível identificar o usuário entre as requisições @done(24-06-16 12:34)
+  ✔ Deve ser possível registrar uma refeição feita, com as seguintes informações: @done(24-06-16 12:34)
+    *As refeições devem ser relacionadas a um usuário.*
+      ✔ Nome @done(24-06-16 13:46)
+      ✔ Descrição @done(24-06-16 13:46)
+      ✔ Data e Hora @done(24-06-16 13:46)
+      ✔ Está dentro ou não da dieta @done(24-06-16 13:46)
+  ✔ Deve ser possível editar uma refeição, podendo alterar todos os dados acima @done(24-06-16 13:30)
+  ✔ Deve ser possível apagar uma refeição @done(24-06-16 13:39)
+  ✔ Deve ser possível listar todas as refeições de um usuário @done(24-06-16 12:43)
+  ✔ Deve ser possível visualizar uma única refeição @done(24-06-16 12:49)
+  ✔ Deve ser possível recuperar as métricas de um usuário @done(24-06-16 14:06)
+    ✔ Quantidade total de refeições registradas @done(24-06-16 14:06)
+    ✔ Quantidade total de refeições dentro da dieta @done(24-06-16 14:06)
+    ✔ Quantidade total de refeições fora da dieta @done(24-06-16 14:06)
+    ✔ Melhor sequência de refeições dentro da dieta @done(24-06-16 14:06)
+  ✔ O usuário só pode visualizar, editar e apagar as refeições o qual ele criou @done(24-06-16 13:39)
+  
