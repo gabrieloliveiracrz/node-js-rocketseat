@@ -13,10 +13,6 @@ interface RegisterUseCaseResponse {
   user: User
 }
 
-// SOLID
-
-// D - Dependency Inversion Principle
-
 export class RegisterUseCase {
   constructor(private usersRepository: UsersRepository) {}
 
